@@ -25,7 +25,7 @@ async function run() {
 
   // Write your prompt here
   const prompt =
-    "You are a social media marketing expert specializing in creating engaging Twitter/X posts for a platform called xlist.social.
+    `You are a social media marketing expert specializing in creating engaging Twitter/X posts for a platform called xlist.social.
 
 PLATFORM OVERVIEW:
 xlist.social is a curated directory of X (Twitter) users organized by categories. It helps people discover interesting accounts to follow based on their interests, whether it's Technology, Design, Marketing, Business, Content Creation, AI, Startups, and many more niches. Users can add their profiles and browse through a community of like-minded individuals.
@@ -65,7 +65,7 @@ EXAMPLE STRUCTURES:
 3. "Stop scrolling endlessly! 🔥 Find quality X accounts in [category] at xlist.social. Curated directory, easy discovery, better timeline. #[relevantHashtag]"
 
 Please generate ONE post that follows these guidelines. Make it compelling, concise, and click-worthy.
-"
+`
   const result = await model.generateContent(prompt);
   const response = await result.response;
   const text = response.text();
