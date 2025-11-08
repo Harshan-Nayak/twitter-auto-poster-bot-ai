@@ -1,12 +1,16 @@
 name: Auto Tweet Using AI
 
-# Runs every hour
+# Runs every 2 hours on the hour in India (IST = UTC+5:30)
+# Cron uses UTC. This cron triggers at minute 30 UTC every 2 hours:
+# UTC 18:30,20:30,22:30,00:30,... => IST 00:00,02:00,04:00,...
 on:
   schedule:
-    - cron: "0 * * * *"
-
-  # This command allows us to run the Action automatically from the Actions tab.
+    - cron: "30 */2 * * *"
   workflow_dispatch:
+
+concurrency:
+  group: auto-tweet-bot
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -14,12 +18,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@master
+        uses: actions/checkout@v3
       - name: Use Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
           node-version: "20.x"
       - name: Install Dependencies
-        run: npm i
+        run: npm ci
       - name: Run Twitter bot
         run: npm start
